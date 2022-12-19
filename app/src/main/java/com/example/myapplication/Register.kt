@@ -57,7 +57,7 @@ class Register : AppCompatActivity() {
             val pass = regpass.text.toString()
             val name = username.text.toString()
             val number = phone.text.toString()
-            val user = Firebase.auth.currentUser
+
 
             if (name.isEmpty() || pass.isEmpty() || number.isEmpty() || mail.isEmpty()) {
                 Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
@@ -71,10 +71,9 @@ class Register : AppCompatActivity() {
 
                             database = FirebaseDatabase.getInstance().getReference("Users")
                             val User = User(name, mail, number, pass)
-                            database.child(user?.uid.toString()).setValue(User)
+                            database.child(Firebase.auth.currentUser?.uid.toString()).setValue(User)
                                 .addOnSuccessListener {
                                     uploadprofilepic()
-                                    FirebaseAuth.getInstance().signOut()
                                 }
                         }
                     }
