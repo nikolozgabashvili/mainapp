@@ -74,6 +74,7 @@ class Register : AppCompatActivity() {
                             database.child(Firebase.auth.currentUser?.uid.toString()).setValue(User)
                                 .addOnSuccessListener {
                                     uploadprofilepic()
+                                    FirebaseAuth.getInstance().signOut()
                                 }
                         }
                     }
